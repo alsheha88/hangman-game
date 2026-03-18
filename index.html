@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mouse+Memoirs&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Hangman game</title>
+</head>
+
+<body>
+  <main>
+    <section id="mainMenu" class="main-menu">
+      <div class="menu-container">
+        <img src="./assets/images/logo.svg" class="logo" alt="logo">
+        <div class="outer-ring">
+          <button type="button" id="startGame" class="start-game"><img src="./assets/images/icon-play.svg"
+              alt="play button"></button>
+        </div>
+        <button type="button" id="howToPlayBtn" class="how-to-play-btn btn btn--blue">How To Play</button>
+      </div>
+    </section>
+    <section id="howToPlay" class="guidlines-section">
+      <div class="header">
+        <button type="button" class="btn--gradient" id="backBtn"><img src="./assets/images/icon-back.svg"
+            alt="back button"></button>
+        <h1>How to Play</h1>
+      </div>
+      <div class="game-guidlines">
+        <div class="card">
+          <h2>01</h2>
+          <h3>Choose a category</h3>
+          <p> First, choose a word category, like animals or movies.
+            The computer then randomly selects a secret word from that
+            topic and shows you blanks for each letter of the word.</p>
+        </div>
+        <div class="card">
+          <h2>02</h2>
+          <h3> Guess letters
+          </h3>
+          <p>Take turns guessing letters. The computer fills in the
+            relevant blank spaces if your guess is correct. If it's
+            wrong, you lose some health, which empties after eight
+            incorrect guesses.</p>
+        </div>
+        <div class="card">
+          <h2>03</h2>
+          <h3> Win or lose
+          </h3>
+          <p>You win by guessing all the letters in the word before your
+            health runs out. If the health bar empties before you guess
+            the word, you lose.</p>
+        </div>
+      </div>
+    </section>
+    <section class="categories-section">
+      <div class="header">
+        <button type="button" class="btn--gradient" id="backBtn"><img src="./assets/images/icon-back.svg"
+            alt="back button"></button>
+        <h1>Pick a Category</h1>
+      </div>
+      <div class="categories">
+        <div class="categories-row">
+          <button class="category btn--blue" type="button" data-category="Movies">Movies</button>
+          <button class="category btn--blue" type="button" data-category="TV Shows">TV Shows</button>
+          <button class="category btn--blue" type="button" data-category="Countries">Countries</button>
+        </div>
+        <div class="categories-row">
+          <button class="category btn--blue" type="button" data-category="Capital Cities">Capital Cities</button>
+          <button class="category btn--blue" type="button" data-category="Animals">Animals</button>
+          <button class="category btn--blue" type="button" data-category="Sports">Sports</button>
+        </div>
+      </div>
+    </section>
+    <section class="in-game-section">
+      <div class="header">
+        <div class="menu-header">
+          <button type="button" class="btn--gradient"><img src="./assets/images/icon-menu.svg" alt="menu"></button>
+          <h2 id="gameCategory">Movies</h2>
+        </div>
+        <div class="progress">
+          <div class="progress-container">
+            <div class="progress-bar"></div>
+          </div>
+          <img src="./assets/images/icon-heart.svg" alt="">
+        </div>
+      </div>
+      <div class="word-box">
+        <div class="word-row"></div>
+        <div class="word-row"></div>
+      </div>
+      <div class="letter-box">
+        <button type="button" data-letter="A">A</button>
+        <button type="button" data-letter="B">B</button>
+        <button type="button" data-letter="C">C</button>
+        <button type="button" data-letter="D">D</button>
+        <button type="button" data-letter="E">E</button>
+        <button type="button" data-letter="F">F</button>
+        <button type="button" data-letter="G">G</button>
+        <button type="button" data-letter="H">H</button>
+        <button type="button" data-letter="I">I</button>
+        <button type="button" data-letter="J">J</button>
+        <button type="button" data-letter="K">K</button>
+        <button type="button" data-letter="L">L</button>
+        <button type="button" data-letter="M">M</button>
+        <button type="button" data-letter="N">N</button>
+        <button type="button" data-letter="O">O</button>
+        <button type="button" data-letter="P">P</button>
+        <button type="button" data-letter="Q">Q</button>
+        <button type="button" data-letter="R">R</button>
+        <button type="button" data-letter="S">S</button>
+        <button type="button" data-letter="T">T</button>
+        <button type="button" data-letter="U">U</button>
+        <button type="button" data-letter="V">V</button>
+        <button type="button" data-letter="W">W</button>
+        <button type="button" data-letter="X">X</button>
+        <button type="button" data-letter="Y">Y</button>
+        <button type="button" data-letter="Z">Z</button>
+      </div>
+    </section>
+  </main>
+  <div id="gameWon" class="modal" style="display: none;">
+    <div class="modal-container">
+      <h1>You Win</h1>
+      <button type="button" class="btn btn--blue">Play Again</button>
+      <button type="button" class="btn btn--blue">New Category</button>
+      <button type="button" class="btn btn--gradient">Quit Game</button>
+    </div>
+  </div>
+  <div id="gameLost" class="modal" style="display: none;">
+    <div class="modal-container">
+      <h1>You Lose</h1>
+      <button type="button" class="btn btn--blue">Play Again</button>
+      <button type="button" class="btn btn--blue">New Category</button>
+      <button type="button" class="btn btn--gradient">Quit Game</button>
+    </div>
+  </div>
+  <div id="gamePause" class="modal" style="display: none;">
+    <div class="modal-container">
+      <h1>Paused</h1>
+      <button type="button" class="btn btn--blue">Continue</button>
+      <button type="button" class="btn btn--blue">New Category</button>
+      <button type="button" class="btn btn--gradient">Quit Game</button>
+    </div>
+  </div>
+
+  <!-- Game screen start -->
+
+  <!-- Movies/TV Shows/Countries/Capital Cities/Animals/Sports
+
+  a b c d e f g h i j k l m n o p q r s t u v w x y z
+
+  Paused/You Win/You Lose
+
+  Continue
+  Play again!
+  New category
+  Quit game -->
+
+  <!-- Game screen end -->
+  <script src="./index.js"></script>
+</body>
+
+</html>
