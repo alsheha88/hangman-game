@@ -15,19 +15,19 @@
 
 <body>
   <main>
-    <section id="mainMenu" class="main-menu">
+    <section id="mainMenu" data-section="main-menu" class="main-menu">
       <div class="menu-container">
         <img src="./assets/images/logo.svg" class="logo" alt="logo">
         <div class="outer-ring">
-          <button type="button" id="startGame" class="start-game"><img src="./assets/images/icon-play.svg"
+          <button type="button" id="startGame" class="start-game btn--gradient"><img src="./assets/images/icon-play.svg"
               alt="play button"></button>
         </div>
         <button type="button" id="howToPlayBtn" class="how-to-play-btn btn btn--blue">How To Play</button>
       </div>
     </section>
-    <section id="howToPlay" class="guidlines-section">
+    <section id="howToPlay" data-section="howToPlay" class="guidlines-section">
       <div class="header">
-        <button type="button" class="btn--gradient" id="backBtn"><img src="./assets/images/icon-back.svg"
+        <button type="button" class="btn--gradient" data-action="backBtn"><img src="./assets/images/icon-back.svg"
             alt="back button"></button>
         <h1>How to Play</h1>
       </div>
@@ -58,9 +58,9 @@
         </div>
       </div>
     </section>
-    <section class="categories-section">
+    <section id="categoriesSection" data-section="categoriesSection" class="categories-section">
       <div class="header">
-        <button type="button" class="btn--gradient" id="backBtn"><img src="./assets/images/icon-back.svg"
+        <button type="button" class="btn--gradient" data-action="backBtn"><img src="./assets/images/icon-back.svg"
             alt="back button"></button>
         <h1>Pick a Category</h1>
       </div>
@@ -77,10 +77,10 @@
         </div>
       </div>
     </section>
-    <section class="in-game-section">
+    <section id="inGameSection" data-section="inGameSection" class="in-game-section">
       <div class="header">
         <div class="menu-header">
-          <button type="button" class="btn--gradient"><img src="./assets/images/icon-menu.svg" alt="menu"></button>
+          <button type="button" data-menu="pause-menu" class="btn--gradient"><img src="./assets/images/icon-menu.svg" alt="menu"></button>
           <h2 id="gameCategory">Movies</h2>
         </div>
         <div class="progress">
@@ -90,80 +90,70 @@
           <img src="./assets/images/icon-heart.svg" alt="">
         </div>
       </div>
-      <div class="word-box">
-        <div class="word-row"></div>
-        <div class="word-row"></div>
-      </div>
-      <div class="letter-box">
-        <button type="button" data-letter="A">A</button>
-        <button type="button" data-letter="B">B</button>
-        <button type="button" data-letter="C">C</button>
-        <button type="button" data-letter="D">D</button>
-        <button type="button" data-letter="E">E</button>
-        <button type="button" data-letter="F">F</button>
-        <button type="button" data-letter="G">G</button>
-        <button type="button" data-letter="H">H</button>
-        <button type="button" data-letter="I">I</button>
-        <button type="button" data-letter="J">J</button>
-        <button type="button" data-letter="K">K</button>
-        <button type="button" data-letter="L">L</button>
-        <button type="button" data-letter="M">M</button>
-        <button type="button" data-letter="N">N</button>
-        <button type="button" data-letter="O">O</button>
-        <button type="button" data-letter="P">P</button>
-        <button type="button" data-letter="Q">Q</button>
-        <button type="button" data-letter="R">R</button>
-        <button type="button" data-letter="S">S</button>
-        <button type="button" data-letter="T">T</button>
-        <button type="button" data-letter="U">U</button>
-        <button type="button" data-letter="V">V</button>
-        <button type="button" data-letter="W">W</button>
-        <button type="button" data-letter="X">X</button>
-        <button type="button" data-letter="Y">Y</button>
-        <button type="button" data-letter="Z">Z</button>
+      <div class="word-letter-container">
+        <div class="word-box">
+          <div class="word-row">
+            <button class="word" disabled="true"><span class="hidden" >A</span></button>
+          </div>
+        </div>
+        <div id="letterBox" class="letter-box">
+          <button type="button" data-letter="A">A</button>
+          <button type="button" data-letter="B">B</button>
+          <button type="button" data-letter="C">C</button>
+          <button type="button" data-letter="D">D</button>
+          <button type="button" data-letter="E">E</button>
+          <button type="button" data-letter="F">F</button>
+          <button type="button" data-letter="G">G</button>
+          <button type="button" data-letter="H">H</button>
+          <button type="button" data-letter="I">I</button>
+          <button type="button" data-letter="J">J</button>
+          <button type="button" data-letter="K">K</button>
+          <button type="button" data-letter="L">L</button>
+          <button type="button" data-letter="M">M</button>
+          <button type="button" data-letter="N">N</button>
+          <button type="button" data-letter="O">O</button>
+          <button type="button" data-letter="P">P</button>
+          <button type="button" data-letter="Q">Q</button>
+          <button type="button" data-letter="R">R</button>
+          <button type="button" data-letter="S">S</button>
+          <button type="button" data-letter="T">T</button>
+          <button type="button" data-letter="U">U</button>
+          <button type="button" data-letter="V">V</button>
+          <button type="button" data-letter="W">W</button>
+          <button type="button" data-letter="X">X</button>
+          <button type="button" data-letter="Y">Y</button>
+          <button type="button" data-letter="Z">Z</button>
+        </div>
       </div>
     </section>
   </main>
-  <div id="gameWon" class="modal" style="display: none;">
-    <div class="modal-container">
-      <h1>You Win</h1>
-      <button type="button" class="btn btn--blue">Play Again</button>
-      <button type="button" class="btn btn--blue">New Category</button>
-      <button type="button" class="btn btn--gradient">Quit Game</button>
+  <div id="modals">
+    <div id="gameWon" class="modal">
+      <div class="modal-container">
+        <h1>You Win</h1>
+        <button type="button" data-action="playAgain" class="btn btn--blue">Play Again</button>
+        <button type="button" data-action="newCategory" class="btn btn--blue">New Category</button>
+        <button type="button" data-action="quitGame" class="btn btn--gradient">Quit Game</button>
+      </div>
+    </div>
+    <div id="gameLost" class="modal">
+      <div class="modal-container">
+        <h1>You Lose</h1>
+        <button type="button" data-action="playAgain" class="btn btn--blue">Play Again</button>
+        <button type="button" data-action="newCategory" class="btn btn--blue">New Category</button>
+        <button type="button" data-action="quitGame" class="btn btn--gradient">Quit Game</button>
+      </div>
+    </div>
+    <div id="gamePause" class="modal" >
+      <div class="modal-container">
+        <h1>Paused</h1>
+        <button type="button" data-action="continue" class="btn btn--blue">Continue</button>
+        <button type="button" data-action="newCategory" class="btn btn--blue">New Category</button>
+        <button type="button" data-action="quitGame" class="btn btn--gradient">Quit Game</button>
+      </div>
     </div>
   </div>
-  <div id="gameLost" class="modal" style="display: none;">
-    <div class="modal-container">
-      <h1>You Lose</h1>
-      <button type="button" class="btn btn--blue">Play Again</button>
-      <button type="button" class="btn btn--blue">New Category</button>
-      <button type="button" class="btn btn--gradient">Quit Game</button>
-    </div>
-  </div>
-  <div id="gamePause" class="modal" style="display: none;">
-    <div class="modal-container">
-      <h1>Paused</h1>
-      <button type="button" class="btn btn--blue">Continue</button>
-      <button type="button" class="btn btn--blue">New Category</button>
-      <button type="button" class="btn btn--gradient">Quit Game</button>
-    </div>
-  </div>
-
-  <!-- Game screen start -->
-
-  <!-- Movies/TV Shows/Countries/Capital Cities/Animals/Sports
-
-  a b c d e f g h i j k l m n o p q r s t u v w x y z
-
-  Paused/You Win/You Lose
-
-  Continue
-  Play again!
-  New category
-  Quit game -->
-
-  <!-- Game screen end -->
-  <script src="./index.js"></script>
+  <script src="./index.js" type="module"></script>
 </body>
 
 </html>
