@@ -198,14 +198,20 @@ function renderSections(){
 }
 async function initHangman() {
     state.library = await fetchWords();
-
     resetDOM()
+    const menuBtn = document.querySelector('[data-menu]');
+    if (menuBtn) {
+    menuBtn.addEventListener('click', renderPauseMenu); // only attach if present
+    }
+
+    const continueBtn = document.querySelector('[data-action="continue"]');
+    if (continueBtn) {
+    continueBtn.addEventListener('click', continuePlaying); // prevents TypeError
+    }
     document.querySelector('.categories').addEventListener('click', selectCategory);
     document.querySelector('#letterBox').addEventListener('click', checkWord);
-    document.querySelector('[data-menu]').addEventListener('click', renderPauseMenu);
     document.querySelectorAll('[data-action="quitGame"]').forEach((btn) => btn.addEventListener('click', quitGame))
     document.querySelectorAll('[data-action="newCategory"]').forEach((btn) => btn.addEventListener('click', pickNewCategory))
-    document.querySelector('[data-action="continue"]').addEventListener('click', continuePlaying);
     document.querySelectorAll('[data-action="playAgain"]').forEach((btn) => btn.addEventListener('click', playAgain));
     renderSections();
 }
