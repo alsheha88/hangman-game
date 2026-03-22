@@ -39,13 +39,25 @@ function selectCategory(e){
     document.querySelector('#inGameSection').classList.add('show');
     document.querySelector('#gameCategory').innerHTML = state.categorySelected;
 }
-function getWord(category){
-    const randomWordObj =  state.library.categories[category].filter((item) => !item.selected);
-    const randomIndex = Math.floor(Math.random() * randomWordObj.length)
-    state.library.categories[category].find(item => item.name === randomWordObj[randomIndex].name).selected = true    
-    state.wordSelected = randomWordObj[randomIndex].name.toUpperCase().split(' ')
-    document.querySelector('.word-box').innerHTML = renderWord(state.wordSelected)
-    // document.querySelector('.word-row').style.gridTemplateColumns = `repeat(${state.wordSelected.length}, 1fr)`
+function getWord(category) {
+  const available = state.library.categories[category].filter(item => !item.selected);
+
+  if (available.length === 0) {
+    // No words left: show a friendly message and stop the selection flow
+    document.querySelector('.word-box').textContent = 'No more words in this category.';
+    // Optionally disable the play button or offer "reset" UI
+    return;
+  }
+
+  const idx = Math.floor(Math.random() * available.length); // safe because available.length > 0
+  const chosen = available[idx];
+
+  // Mark as selected in the original category array
+  const original = state.library.categories[category].find(item => item.name === chosen.name);
+  if (original) original.selected = true;
+
+  state.wordSelected = chosen.name.toUpperCase().split(' ');
+  document.querySelector('.word-box').innerHTML = renderWord(state.wordSelected);
 }
 function createWordRows(wordArr){
     const rows = [];
