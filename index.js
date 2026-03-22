@@ -13,7 +13,6 @@ async function fetchWords() {
 	const data = await res.json();
 	return data;
 }
-state.library = await fetchWords();
 function resetDOM(){
 	document.getElementById("mainMenu").classList.remove("hide");
 	document.getElementById("categoriesSection").classList.remove("show");
@@ -49,8 +48,8 @@ function getWord(category){
     // document.querySelector('.word-row').style.gridTemplateColumns = `repeat(${state.wordSelected.length}, 1fr)`
 }
 function createWordRows(wordArr){
-    let rows = [];
-    let currentRow = [];
+    const rows = [];
+    const currentRow = [];
     let currentRowLength = 0;
     let rowLimit = 8;
     
@@ -185,7 +184,9 @@ function renderSections(){
 	document.getElementById("startGame").addEventListener("click", renderCategoriesSection);
 	document.querySelectorAll('[data-action="backBtn"]').forEach(btn => btn.addEventListener("click", renderHomePage));
 }
-function initHangman() {
+async function initHangman() {
+    state.library = await fetchWords();
+
     resetDOM()
     document.querySelector('.categories').addEventListener('click', selectCategory);
     document.querySelector('#letterBox').addEventListener('click', checkWord);
@@ -196,4 +197,9 @@ function initHangman() {
     document.querySelectorAll('[data-action="playAgain"]').forEach((btn) => btn.addEventListener('click', playAgain));
     renderSections();
 }
-initHangman();
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initHangman);
+} else {
+  initHangman();
+}
