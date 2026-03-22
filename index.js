@@ -49,7 +49,7 @@ function getWord(category){
 }
 function createWordRows(wordArr){
     const rows = [];
-    const currentRow = [];
+    let currentRow = [];
     let currentRowLength = 0;
     let rowLimit = 8;
     
