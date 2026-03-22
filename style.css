@@ -96,7 +96,9 @@ main{
     height: 100dvh;
     display: flex;
     justify-content: center;
+    backdrop-filter: brightness(75%);
 }
+
 /* Main Menue */
 .main-menu {
 	display: flex;
@@ -147,8 +149,8 @@ main{
 .guidlines-section{
     display: none;
     flex-direction: column;
-    gap: 10rem;
-    width: min(76rem, 90%);
+    gap: 4rem;
+    width: min(76rem, 95%);
 }
 .header{
     width: 100%;
@@ -182,10 +184,9 @@ main{
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-400);
 }
+
 .card{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
     background-color: var(--color-neutral-0);
     padding: var(--space-750) var(--space-600);
     gap: var(--space-500);
@@ -195,42 +196,57 @@ main{
 .card h2{
     font-size: var(--text-4);
     color: var(--color-blue-600);
+    width: 100%;
+}
+.card div{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-200);
 }
 .card h3{
     font-size: var(--text-6);
     color: var(--color-indigo-600);
+    width: 100%;
+
 }
 .card p{
     font-size: var(--text-9);
     color: var(--color-indigo-400);
+    width: 100%;
 }
 
 /* Categories Section */
 .categories-section{
     display: none;
     flex-direction: column;
-    gap: 10rem;
+    gap: 3rem;
     width: min(76rem, 90%);
+    position: relative;
 }
 .categories{
     display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
     gap: var(--space-625);
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
 }
 .categories-row{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-400);
+    min-height: 11rem;
 }
 .category{
     padding: var(--space-150) var(--space-800);
     border-radius: var(--radius-40);
     font-size: var(--text-6);
     color: var(--color-neutral-0);
-    min-height: 11rem;
+    min-height: 2rem;
 }
 
 /* In Game Section */
-
 .in-game-section{
     display: none;
     flex-direction: column;
@@ -248,13 +264,12 @@ main{
 }
 .progress{
     display: flex;
-    flex: 1;
-    max-width: 20.8rem;
     align-items: center;
+    justify-content: flex-end;
     gap: var(--space-500);
 }
 .progress-container{
-    flex-grow: 1;
+    width: clamp(4rem, 15vw, 13rem);
     padding: 9px 11px;
     background-color: var(--color-neutral-0);
     border-radius: var(--radius-full);
@@ -270,7 +285,9 @@ main{
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: var(--space-800);
+    flex-grow: 1;
 }
 .word-box{
     width: 100%;
@@ -288,17 +305,19 @@ main{
     gap: var(--space-200);
 }
 .word{
-    padding: var(--space-150) var(--space-800);
+    width: clamp(2.5rem, 8vw, 6.5rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-150) clamp(0.5rem, 3vw, var(--space-800));
     border-radius: var(--radius-40);
     font-size: var(--text-4);
     aspect-ratio: 1;
     max-height: 6.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     color: var(--color-neutral-0);
-    background: hsla(250, 69%, 27%, 0.75);
-    box-shadow: 0px -4px 0px 1px rgba(36, 99, 255, 0.4);
+    background: var(--color-blue-600);
+    box-shadow: 0px -4px 0px 1px hsla(223, 100%, 68%, 1);
+    opacity: 0.25;
     pointer-events: none;
 }
 .word-spacer{
@@ -308,8 +327,8 @@ main{
     visibility: hidden;
 }
 .word.correct{
-    background: var(--color-blue-600);
-    box-shadow: 0px -4px 0px 1px hsla(223, 100%, 68%, 1);
+    opacity: 1;
+
 }
 .letter-box{
     display: grid;
@@ -386,26 +405,149 @@ button[data-letter]:hover{
     background: var(--gradient-4);
 }
 
-
 /* Classes */
 .hide{
     display: none;
 }
-.show-flex{
+.show{
     display: flex;
 }
-.show-grid{
-    display: grid;
-}
-@media (max-width: 48rem) {
+
+@media (max-width: 950px) {
 	body {
 		background: var(--bg-tablet);
+        background-repeat: no-repeat;
+        background-size: cover;
 	}
+    .game-guidlines {
+        grid-template-columns: 1fr;
+    }
+    .categories{
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-400);
+        min-height: 38rem;
+        min-width: max-content;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+    .categories-row{
+        grid-template-columns: 1fr;
+    }
+    button[data-action="backBtn"], button[data-menu="pause-menu"]{
+        width: 4rem;
+    }
+    button[data-action="backBtn"] img, button[data-menu="pause-menu"] img{
+        width: 1.5rem;
+    }
+    .card {
+        grid-template-columns: auto 1fr;
+        place-items: center;
+        text-align: left;
+        padding: var(--space-400) var(--space-500);
+    }
+
+    .card h2 {
+        font-size: var(--text-4);
+    }
+
+    .card h3 {
+        font-size: var(--text-7);
+    }
+    .card p{
+        font-size: var(--text-11);
+    }
+    .menu-header{
+        gap: var(--space-400);
+    }
+    .menu-header h2{
+        font-size: var(--text-6);
+
+    }
+
+    .header h1{
+        font-size: var(--text-2);
+        -webkit-text-stroke: 4px #1a2340;
+
+    }
+    .word-row{
+        gap: var(--space-150);
+    }
+    button[data-letter],
+    button[data-word] {
+        border-radius: var(--radius-8);
+    }
+    .modal h1{
+        font-size: var(--text-3);
+    }
+    
 }
-@media (max-width: 31rem) {
+@media (max-width: 660px) {
 	body {
 		background: var(--bg-mobile);
 		background-repeat: no-repeat;
 		background-size: cover;
 	}
+    .start-game{
+        width: 10rem;
+    }
+    .header h1{
+        font-size: var(--text-6);
+        -webkit-text-stroke: 2px #1a2340;
+        text-align: end;
+    }
+    .categories{
+        grid-template-columns: 1fr;
+    }
+    .category{
+        gap: var(--space-200);
+        padding: var(--space-300) var(--space-800);
+        font-size: var(--text-10);
+        border-radius: var(--radius-20);
+        width: 100%;
+    }
+    .menu-header{
+        gap: var(--space-200);
+    }
+    .menu-header h2{
+        font-size: var(--text-7);
+
+    }
+    button[data-action="backBtn"], button[data-menu="pause-menu"]{
+        width: 2.5rem;
+    }
+    button[data-action="backBtn"] img, button[data-menu="pause-menu"] img{
+        width: 1rem;
+    }
+    .progress-container{
+        padding: 0.25rem;
+    }
+    .progress{
+        gap: var(--space-200);
+    }
+    .progress img{
+        width: 1.5rem;
+    }
+    .card{
+        place-items: start;
+        gap: var(--space-200);
+    }
+    .card h2 {
+        font-size: var(--text-10);
+    }
+
+    .card h3 {
+        font-size: var(--text-10);
+    }
+    .card p{
+        font-size: var(--text-12);
+    }
+    .word-row{
+        gap: var(--space-100);
+    }
+    button[data-letter],
+    button[data-word] {
+        font-size: var(--text-10);
+    }
+    
+    
 }

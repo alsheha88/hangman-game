@@ -16,12 +16,12 @@ async function fetchWords() {
 state.library = await fetchWords();
 function resetDOM(){
 	document.getElementById("mainMenu").classList.remove("hide");
-	document.getElementById("categoriesSection").classList.remove("show-flex");
-	document.getElementById("howToPlay").classList.remove("show-flex");
-    document.querySelector('#inGameSection').classList.remove('show-flex');
-    document.querySelector('#gamePause').classList.remove('show-flex');
-    document.querySelector('#gameWon').classList.remove('show-flex');
-    document.querySelector('#gameLost').classList.remove('show-flex');
+	document.getElementById("categoriesSection").classList.remove("show");
+	document.getElementById("howToPlay").classList.remove("show");
+    document.querySelector('#inGameSection').classList.remove('show');
+    document.querySelector('#gamePause').classList.remove('show');
+    document.querySelector('#gameWon').classList.remove('show');
+    document.querySelector('#gameLost').classList.remove('show');
 }
 function resetState(){
     state.wordSelected = [];
@@ -36,8 +36,8 @@ function selectCategory(e){
     if (!btn) return;
     state.categorySelected = btn.dataset.category;
     getWord(state.categorySelected)
-    document.querySelector('#categoriesSection').classList.remove('show-flex');
-    document.querySelector('#inGameSection').classList.add('show-flex');
+    document.querySelector('#categoriesSection').classList.remove('show');
+    document.querySelector('#inGameSection').classList.add('show');
     document.querySelector('#gameCategory').innerHTML = state.categorySelected;
 }
 function getWord(category){
@@ -46,6 +46,7 @@ function getWord(category){
     state.library.categories[category].find(item => item.name === randomWordObj[randomIndex].name).selected = true    
     state.wordSelected = randomWordObj[randomIndex].name.toUpperCase().split(' ')
     document.querySelector('.word-box').innerHTML = renderWord(state.wordSelected)
+    // document.querySelector('.word-row').style.gridTemplateColumns = `repeat(${state.wordSelected.length}, 1fr)`
 }
 function createWordRows(wordArr){
     let rows = [];
@@ -83,7 +84,6 @@ function checkWord(e){
     if (btn) btn.disabled = true;
     state.letterSelected = btn.dataset.letter;
     if (lettersArray.includes(state.letterSelected)){
-        console.log('correct')
         document.querySelectorAll(`[data-word = "${state.letterSelected}"]`).forEach((letter) =>{
             letter.classList.add('correct')
             letter.querySelector('span').classList.remove('hidden')
@@ -99,10 +99,10 @@ function checkWord(e){
 function gameEnd(correctSelectionCount, wrongSelectionCount, wrongCount){
     const letterCount = state.wordSelected.join('').split('').length;
     if (correctSelectionCount === letterCount){
-        document.querySelector('#gameWon').classList.add('show-flex');
+        document.querySelector('#gameWon').classList.add('show');
     }
     if (wrongSelectionCount === wrongCount){
-        document.querySelector('#gameLost').classList.add('show-flex');
+        document.querySelector('#gameLost').classList.add('show');
     }
     // console.log(state.library)
 
@@ -117,37 +117,37 @@ function pickNewCategory(e){
     const btn = e.target.closest('[data-action="newCategory"]');
     if (!btn) return;
     resetState();
-	document.getElementById("categoriesSection").classList.add("show-flex");
-    document.querySelector('#inGameSection').classList.remove('show-flex');
+	document.getElementById("categoriesSection").classList.add("show");
+    document.querySelector('#inGameSection').classList.remove('show');
     document.querySelector('.progress-bar').style.width = '100%'
     document.querySelectorAll('[data-letter]').forEach((btn) => btn.disabled = false);
-    e.target.parentElement.parentElement.classList.remove('show-flex')
+    e.target.parentElement.parentElement.classList.remove('show')
 }
 function renderPauseMenu(e){
     const btn = e.target.closest('[data-menu]');
     if (!btn) return;
-    document.querySelector('#gamePause').classList.add('show-flex')
+    document.querySelector('#gamePause').classList.add('show')
 }
 function renderGameGuide() {
 	document.getElementById("mainMenu").classList.add("hide");
-	document.getElementById("howToPlay").classList.add("show-flex");
+	document.getElementById("howToPlay").classList.add("show");
 }
 function renderHomePage(e) {
     const section = e.currentTarget.closest('[data-section]');
     if (!section) return;
     if (section) {
-        section.classList.remove('show-flex')
+        section.classList.remove('show')
         document.getElementById('mainMenu').classList.remove('hide')
     }
 }
 function renderCategoriesSection() {
 	document.getElementById("mainMenu").classList.add("hide");
-	document.getElementById("categoriesSection").classList.add("show-flex");
+	document.getElementById("categoriesSection").classList.add("show");
 }
 function continuePlaying(e){
     const btn = e.target.closest('[data-action="continue"]');
     if (!btn) return;
-    document.querySelector('#gamePause').classList.remove('show-flex');
+    document.querySelector('#gamePause').classList.remove('show');
 }
 function playAgain(e){
     const btn = e.target.closest('[data-action="playAgain"]');
@@ -160,11 +160,11 @@ function playAgain(e){
     document.querySelector('.progress-bar').style.width = '100%'
     document.querySelectorAll('[data-letter]').forEach((btn) => btn.disabled = false);
     getWord(state.categorySelected);
-    e.target.parentElement.parentElement.classList.remove('show-flex');
+    e.target.parentElement.parentElement.classList.remove('show');
 }
 function renderWord(wordArr){
     return createWordRows(wordArr).map((phrase) => {
-        return `<div class="word-row">
+        return `<div class="word-row" style="grid-template-columns: repeat(${state.wordSelected.length}, 1fr)">
             ${phrase.map((word, index) => {
         const letters = word.split('').map((letter) => {
             return `<button class="word" data-word='${letter}' disabled="true"><span class="hidden">${letter}</span></button>`

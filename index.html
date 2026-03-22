@@ -34,27 +34,33 @@
       <div class="game-guidlines">
         <div class="card">
           <h2>01</h2>
-          <h3>Choose a category</h3>
-          <p> First, choose a word category, like animals or movies.
-            The computer then randomly selects a secret word from that
-            topic and shows you blanks for each letter of the word.</p>
+          <div>
+            <h3>Choose a category</h3>
+            <p> First, choose a word category, like animals or movies.
+              The computer then randomly selects a secret word from that
+              topic and shows you blanks for each letter of the word.</p>
+          </div>
         </div>
         <div class="card">
           <h2>02</h2>
-          <h3> Guess letters
-          </h3>
-          <p>Take turns guessing letters. The computer fills in the
-            relevant blank spaces if your guess is correct. If it's
-            wrong, you lose some health, which empties after eight
-            incorrect guesses.</p>
+          <div>
+            <h3> Guess letters
+            </h3>
+            <p>Take turns guessing letters. The computer fills in the
+              relevant blank spaces if your guess is correct. If it's
+              wrong, you lose some health, which empties after eight
+              incorrect guesses.</p>
+          </div>
         </div>
         <div class="card">
           <h2>03</h2>
-          <h3> Win or lose
-          </h3>
-          <p>You win by guessing all the letters in the word before your
-            health runs out. If the health bar empties before you guess
-            the word, you lose.</p>
+          <div>
+            <h3> Win or lose
+            </h3>
+            <p>You win by guessing all the letters in the word before your
+              health runs out. If the health bar empties before you guess
+              the word, you lose.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -81,7 +87,7 @@
       <div class="header">
         <div class="menu-header">
           <button type="button" data-menu="pause-menu" class="btn--gradient"><img src="./assets/images/icon-menu.svg" alt="menu"></button>
-          <h2 id="gameCategory">Movies</h2>
+          <h2 id="gameCategory" class="game-category">Movies</h2>
         </div>
         <div class="progress">
           <div class="progress-container">
@@ -93,7 +99,6 @@
       <div class="word-letter-container">
         <div class="word-box">
           <div class="word-row">
-            <button class="word" disabled="true"><span class="hidden" >A</span></button>
           </div>
         </div>
         <div id="letterBox" class="letter-box">
