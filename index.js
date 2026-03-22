@@ -78,7 +78,7 @@ function createWordRows(wordArr){
 function checkWord(e){
     const btn = e.target.closest('[data-letter]');
     const lettersArray = state.wordSelected.join('').split('')
-    const wrongCount = 9;
+    const wrongCount = 8;
     document.querySelectorAll('[data-word]').forEach((value) => value.dataset.word)
     if (!btn) return;
     if (btn) btn.disabled = true;
