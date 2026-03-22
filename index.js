@@ -125,14 +125,21 @@ function quitGame(e){
     resetDOM();
 }
 function pickNewCategory(e){
+    // Find the actionable button that matches the intent (works even if inner element was clicked)
     const btn = e.target.closest('[data-action="newCategory"]');
     if (!btn) return;
+
     resetState();
-	document.getElementById("categoriesSection").classList.add("show");
+    document.getElementById('categoriesSection').classList.add('show');
     document.querySelector('#inGameSection').classList.remove('show');
-    document.querySelector('.progress-bar').style.width = '100%'
-    document.querySelectorAll('[data-letter]').forEach((btn) => btn.disabled = false);
-    e.target.parentElement.parentElement.classList.remove('show')
+    document.querySelector('.progress-bar').style.width = '100%';
+    document.querySelectorAll('[data-letter]').forEach((b) => b.disabled = false);
+
+    // Use the resolved button to find the element to hide; guard in case structure differs
+    const toHide = btn.closest('.modal-container') || btn.parentElement; // choose a reliable anchor
+    if (toHide) {
+        toHide.classList.remove('show'); // safe: toHide is known to exist
+    }
 }
 function renderPauseMenu(e){
     const btn = e.target.closest('[data-menu]');
@@ -160,19 +167,26 @@ function continuePlaying(e){
     if (!btn) return;
     document.querySelector('#gamePause').classList.remove('show');
 }
+
 function playAgain(e){
     const btn = e.target.closest('[data-action="playAgain"]');
     if (!btn) return;
+
+    // reset state
     state.wordSelected = [];
     state.wrongSelectionCount = 0;
     state.correctSelectionCount = 0;
     state.letterSelected = "";
     state.progress = 0;
-    document.querySelector('.progress-bar').style.width = '100%'
-    document.querySelectorAll('[data-letter]').forEach((btn) => btn.disabled = false);
+    document.querySelector('.progress-bar').style.width = '100%';
+    document.querySelectorAll('[data-letter]').forEach((b) => b.disabled = false);
     getWord(state.categorySelected);
-    e.target.parentElement.parentElement.classList.remove('show');
+
+    // Use the confirmed button (btn) and find the modal ancestor reliably
+    const modal = btn.closest('.success-modal'); // replace with your modal selector
+    if (modal) modal.classList.remove('show');
 }
+
 function renderWord(wordArr){
     return createWordRows(wordArr).map((phrase) => {
         return `<div class="word-row" style="grid-template-columns: repeat(${state.wordSelected.length}, 1fr)">
